@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#0a101a">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="description" content="A free, offline-ready music practice toolkit for tuning, timing, tone and recording.">
+  <link rel="manifest" href="manifest.webmanifest">
+  <link rel="apple-touch-icon" href="icon-180.png">
+  <link rel="stylesheet" href="styles.css">
+  <title>Resonance — Practice tools</title>
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <a class="brand" href="#tune" aria-label="Resonance home"><span class="brand-mark"><i></i><i></i><i></i><i></i><i></i></span><span>resonance</span></a>
+      <div class="top-actions"><span class="live-status"><b></b> READY</span><button class="icon-btn" id="settings-open" aria-label="Settings">⚙</button></div>
+    </header>
+    <main>
+      <section class="page active" id="page-tune" data-page="tune">
+        <div class="page-heading"><div><p class="eyebrow">YOUR PRACTICE SPACE</p><h1>Stay in tune.</h1></div><button class="pill-btn" id="reference-btn">♫ <span>A4 · 440 Hz</span></button></div>
+        <div class="tuner-card panel">
+          <div class="card-top"><span class="section-label">CHROMATIC TUNER</span><button class="mini-icon" id="tuner-settings" aria-label="Tuner settings">•••</button></div>
+          <div class="tuner-readout"><span class="note-name" id="note-name">—</span><span class="octave" id="note-octave"></span><div class="freq"><strong id="frequency">—</strong><span>Hz</span></div></div>
+          <div class="dial-wrap"><div class="dial"><div class="dial-ticks"></div><div class="dial-labels"><span>♭</span><span>IN TUNE</span><span>♯</span></div><div class="needle" id="needle"></div><div class="dial-center"><span id="cents">0</span><small>cents</small></div></div></div>
+          <div class="tune-status" id="tune-status">Start listening to tune</div>
+          <button class="primary-btn listen-btn" id="listen-btn"><span class="mic-icon">◉</span><span id="listen-label">Start listening</span></button>
+          <div class="tuner-foot"><span>RANGE <b>C0 — C8</b></span><span>INPUT <b id="input-status">BUILT-IN MIC</b></span></div>
+        </div>
+        <div class="string-tuning panel"><div class="string-head"><span class="section-label">STRING REFERENCE</span><select id="instrument"><option value="chromatic">Chromatic</option><option value="guitar" selected>Guitar · standard</option><option value="bass">Bass · standard</option><option value="violin">Violin</option><option value="viola">Viola</option><option value="cello">Cello</option><option value="ukulele">Ukulele</option></select></div><div class="string-buttons" id="string-buttons"></div><div class="string-foot" id="string-foot">Choose an open string to tune to it.</div></div>
+        <div class="analysis-card panel">
+          <div class="card-top"><button class="section-label analysis-mode" id="analysis-mode">WAVEFORM ↔ SPECTRUM</button><span class="tiny-muted" id="signal-label">Waiting for input</span></div>
+          <canvas id="waveform" aria-label="Live sound waveform"></canvas>
+          <div class="analysis-meta"><span>Amplitude</span><span id="amplitude">— dB</span></div>
+        </div>
+        <div class="quick-grid"><button class="quick-card" data-jump="metronome"><span class="quick-icon mint">◷</span><span><b>Metronome</b><small>Find your pulse</small></span><span class="arrow">↗</span></button><button class="quick-card" data-jump="tone"><span class="quick-icon violet">♫</span><span><b>Tone generator</b><small>Play a reference</small></span><span class="arrow">↗</span></button></div>
+      </section>
+
+      <section class="page" id="page-metronome" data-page="metronome">
+        <div class="page-heading"><div><p class="eyebrow">LOCK IN YOUR PULSE</p><h1>Find the groove.</h1></div><button class="pill-btn" id="tap-btn">TAP TEMPO</button></div>
+        <div class="tempo-card panel">
+          <div class="card-top"><span class="section-label">TEMPO</span><button class="mini-icon" id="save-preset" aria-label="Save preset">＋</button></div>
+          <div class="tempo-display"><button class="tempo-adjust" data-delta="-1" aria-label="Decrease tempo">−</button><div><span class="bpm" id="bpm-display">120</span><span class="bpm-label">BPM</span></div><button class="tempo-adjust" data-delta="1" aria-label="Increase tempo">＋</button></div>
+          <input type="range" id="bpm-range" min="30" max="300" value="120" aria-label="Tempo">
+          <div class="tempo-range"><span>30</span><span>300</span></div>
+          <div class="beat-row" id="beat-row" aria-label="Beat indicator"></div>
+          <div class="meter-controls"><div class="select-wrap"><label for="meter">BEATS / BAR</label><select id="meter"><option>2</option><option>3</option><option selected>4</option><option>5</option><option>6</option><option>7</option><option>8</option><option>9</option><option>12</option></select></div><div class="select-wrap"><label for="subdivision">SUBDIVISION</label><select id="subdivision"><option value="1">Quarter notes</option><option value="2">Eighth notes</option><option value="3">Triplets</option><option value="4">Sixteenth notes</option></select></div><button class="sound-toggle" id="sound-toggle" aria-label="Toggle metronome sound">♪</button></div>
+          <button class="primary-btn play-btn" id="metro-play"><span>▶</span> Start metronome</button>
+        </div>
+        <div class="panel preset-panel"><div class="card-top"><span class="section-label">QUICK PRESETS</span><span class="tiny-muted">Saved on this device</span></div><div class="presets" id="presets"><button class="preset active" data-bpm="120" data-meter="4"><span>Steady</span><b>120</b><small>4 / 4</small></button><button class="preset" data-bpm="88" data-meter="3"><span>Waltz</span><b>88</b><small>3 / 4</small></button><button class="preset" data-bpm="72" data-meter="6"><span>Ballad</span><b>72</b><small>6 / 8</small></button></div></div>
+        <div class="hint-row"><span>✦</span> Tap the tempo button to set a beat from your playing.</div>
+      </section>
+
+      <section class="page" id="page-tone" data-page="tone">
+        <div class="page-heading"><div><p class="eyebrow">HEAR YOUR PITCH</p><h1>Make a reference.</h1></div><button class="pill-btn" id="tone-wave">SINE WAVE</button></div>
+        <div class="tone-card panel"><div class="card-top"><span class="section-label">TONE GENERATOR</span><span class="tiny-muted">Tap a key to play</span></div><div class="tone-note"><div><span class="section-label">SELECTED NOTE</span><h2 id="tone-note">A4</h2><p id="tone-hz">440.00 Hz</p></div><button class="tone-play" id="tone-play" aria-label="Play selected note">▶</button></div>
+          <div class="octave-control"><button id="octave-down">−</button><span>OCTAVE <b id="octave-label">4</b></span><button id="octave-up">＋</button></div>
+          <div class="keyboard-scroll"><div class="keyboard" id="keyboard"></div></div>
+          <div class="tone-controls"><div class="select-wrap"><label for="wave-type">WAVEFORM</label><select id="wave-type"><option value="sine">Sine</option><option value="triangle">Triangle</option><option value="square">Square</option><option value="sawtooth">Sawtooth</option></select></div><div class="select-wrap"><label for="tone-volume">VOLUME</label><input id="tone-volume" type="range" min="0" max="35" value="16"></div></div>
+        </div>
+        <div class="panel drone-panel"><div><span class="section-label">SUSTAINED DRONE</span><p>Keep a reference tone under your practice.</p></div><button class="toggle" id="drone-toggle" aria-label="Toggle drone"><span></span></button></div>
+      </section>
+
+      <section class="page" id="page-record" data-page="record">
+        <div class="page-heading"><div><p class="eyebrow">CAPTURE A TAKE</p><h1>Listen back.</h1></div><span class="pill-btn local-only">STAYS ON DEVICE</span></div>
+        <div class="record-card panel"><div class="record-orb" id="record-orb"><span>●</span></div><p class="record-timer" id="record-timer">00:00</p><p class="record-caption" id="record-caption">Ready when you are</p><button class="record-button" id="record-btn"><span></span><b>Start recording</b></button><p class="record-note">Recordings are stored locally in this browser.</p></div>
+        <div class="panel recordings-panel"><div class="card-top"><span class="section-label">YOUR TAKES</span><span class="tiny-muted" id="take-count">0 recordings</span></div><div class="recordings-list" id="recordings-list"><div class="empty-state"><span>◌</span><b>Nothing recorded yet</b><small>Your practice takes will appear here.</small></div></div></div>
+      </section>
+    </main>
+    <nav class="tabbar" aria-label="Main navigation"><button class="tab active" data-tab="tune"><span>⌁</span><small>Tune</small></button><button class="tab" data-tab="metronome"><span>◷</span><small>Tempo</small></button><button class="tab" data-tab="tone"><span>♫</span><small>Tone</small></button><button class="tab" data-tab="record"><span>◉</span><small>Record</small></button></nav>
+  </div>
+  <div class="modal-backdrop" id="settings-modal" hidden><section class="settings-sheet panel" role="dialog" aria-modal="true" aria-labelledby="settings-title"><div class="sheet-handle"></div><div class="card-top"><div><p class="eyebrow">MAKE IT YOURS</p><h2 id="settings-title">Tuner settings</h2></div><button class="icon-btn" id="settings-close" aria-label="Close settings">×</button></div><label class="setting-field">Concert pitch <span>A = <input id="a4-setting" type="number" min="400" max="480" value="440"> Hz</span></label><label class="setting-field">Transpose <span><select id="transpose"><option value="0">Concert C</option><option value="2">Bb instrument</option><option value="9">Eb instrument</option><option value="7">F instrument</option><option value="12">Octave up</option></select></span></label><label class="setting-field">Note names <span><select id="notation"><option value="english">C D E</option><option value="solfege">Do Re Mi</option></select></span></label><p class="settings-foot">Microphone audio is analyzed on this device and is not uploaded.</p></section></div>
+  <script src="app.js"></script>
+</body>
+</html>
