@@ -22,9 +22,11 @@
       <section class="page active" id="page-tune" data-page="tune">
         <div class="page-heading"><div><p class="eyebrow">YOUR PRACTICE SPACE</p><h1>Stay in tune.</h1></div><button class="pill-btn" id="reference-btn">♫ <span>A4 · 440 Hz</span></button></div>
         <div class="tuner-card panel">
-          <div class="card-top"><span class="section-label">CHROMATIC TUNER</span><button class="mini-icon" id="tuner-settings" aria-label="Tuner settings">•••</button></div>
+          <div class="card-top"><span class="section-label">CHROMATIC TUNER</span><div class="tuner-header-actions"><div class="tuner-modes" role="group" aria-label="Tuner display"><button class="mode-btn active" data-tuner-mode="dial" aria-label="Needle tuner">◜</button><button class="mode-btn" data-tuner-mode="bars" aria-label="Bar tuner">▥</button><button class="mode-btn" data-tuner-mode="smile" aria-label="Smiley tuner">☺</button></div><button class="mini-icon" id="tuner-settings" aria-label="Tuner settings">•••</button></div></div>
           <div class="tuner-readout"><span class="note-name" id="note-name">—</span><span class="octave" id="note-octave"></span><div class="freq"><strong id="frequency">—</strong><span>Hz</span></div></div>
-          <div class="dial-wrap"><div class="dial"><div class="dial-ticks"></div><div class="dial-labels"><span>♭</span><span>IN TUNE</span><span>♯</span></div><div class="needle" id="needle"></div><div class="dial-center"><span id="cents">0</span><small>cents</small></div></div></div>
+          <div class="dial-wrap tuner-view dial-view"><div class="dial"><div class="dial-ticks"></div><div class="dial-labels"><span>♭</span><span>IN TUNE</span><span>♯</span></div><div class="needle" id="needle"></div><div class="dial-center"><span id="cents">0</span><small>cents</small></div></div></div>
+          <div class="bar-view tuner-view" aria-label="Bar tuner"><div class="bar-labels"><span>FLAT</span><span>IN TUNE</span><span>SHARP</span></div><div class="bar-scale" id="bar-scale"><div class="bar-indicator" id="bar-indicator"></div></div><div class="bar-cents"><span>−50</span><strong id="bar-cents">0 cents</strong><span>+50</span></div></div>
+          <div class="smile-view tuner-view" aria-label="Smiley tuner"><svg id="smile-face" viewBox="0 0 160 160" role="img" aria-label="Waiting for a note"><circle class="face-outline" cx="80" cy="80" r="65"/><circle class="face-eye" cx="58" cy="66" r="5"/><circle class="face-eye" cx="102" cy="66" r="5"/><path class="face-mouth" id="face-mouth" d="M48 98 Q80 98 112 98"/></svg><div class="smile-cents" id="smile-cents">Waiting for a note</div></div>
           <div class="tune-status" id="tune-status">Start listening to tune</div>
           <button class="primary-btn listen-btn" id="listen-btn"><span class="mic-icon">◉</span><span id="listen-label">Start listening</span></button>
           <div class="tuner-foot"><span>RANGE <b>C0 — C8</b></span><span>INPUT <b id="input-status">BUILT-IN MIC</b></span></div>
@@ -35,7 +37,6 @@
           <canvas id="waveform" aria-label="Live sound waveform"></canvas>
           <div class="analysis-meta"><span>Amplitude</span><span id="amplitude">— dB</span></div>
         </div>
-        <div class="quick-grid"><button class="quick-card" data-jump="metronome"><span class="quick-icon mint">◷</span><span><b>Metronome</b><small>Find your pulse</small></span><span class="arrow">↗</span></button><button class="quick-card" data-jump="tone"><span class="quick-icon violet">♫</span><span><b>Tone generator</b><small>Play a reference</small></span><span class="arrow">↗</span></button></div>
       </section>
 
       <section class="page" id="page-metronome" data-page="metronome">
